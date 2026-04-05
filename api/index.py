@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 import requests
 import hashlib
 
+# Yeh line sabse upar honi chahiye bina kisi indentation ke
 app = FastAPI()
 
 U1 = "https://100067.connect.garena.com/game/account_security/bind:get_bind_info"
@@ -34,7 +35,7 @@ def hs(s: str):
 
 @app.get("/")
 async def root():
-    return {"status": "SUCCESS", "msg": "Sameer API is Live from api/ folder"}
+    return {"status": "SUCCESS", "msg": "Sameer API is Live"}
 
 @app.get("/api/request")
 async def req_otp(token: str, email: str, request: Request):
@@ -85,7 +86,6 @@ async def friends(token: str, mode: str, target: str = None, request: Request):
     h = gh(request)
     u_m = {"list": U12, "add": U13, "remove": U14, "accept": U15, "decline": U16}
     url = u_m.get(mode)
-    if not url: return {"err": "Invalid Mode"}
     p = {"access_token": token}
     if target: p["target_account_id"] = target
     r = requests.get(url, params=p, headers=h)
